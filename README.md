@@ -9,50 +9,49 @@ Used strategy pattern
 
 ## SUPPORTED COMMANDS & AN EXAMPLE *(CAP sensitive)*
 ###customer
-{% highlight json %}
+```json
 { "command": "customer", "name": "UxU", "password": "12345" }
-{% endhighlight %}
+```
 ###login
-{% highlight json %}
+```json
 { "command": "login", "name": "UxU", "password": "12345" }
-{% endhighlight %}
+```
 ###logout
-{% highlight json %}
+```json
 { "command": "logout", "name": "Wick Wick"}
-{% endhighlight %}
+```
 ###restaurant
-{% highlight json %}
+```json
 { "command": "restaurant", "name": "Klang Bak Kut Teh", "cuisine": "chinese", "opening": "06:00:00", "closing": "14:00:00", "menu": "Bak Kut Teh", "price": "10.80"}
 ## to add more menu in the restaurant just copy the command and change the menu and price field
 { "command": "restaurant", "name": "Klang Bak Kut Teh", "cuisine": "chinese", "opening": "06:00:00", "closing": "14:00:00", "menu": "Chinese Tea", "price": "1.80"}
-{% endhighlight %}
+```
 ###order
-{% highlight json %}
+```json
 { "command": "order", "order": "1", "customer": "UxU", "restaurant": "Klang Bak Kut Teh", "cuisine": "chinese", "menu": "Bak Kut Teh", "time": "13:00:00"}
-{% endhighlight %}
+```
 ###cancel
-{% highlight json %}
+```json
 { "command": "cancel", "order": "2"}
-{% endhighlight %}
+```
 ###change
-{% highlight json %}
+```json
 { "command": "change", "order": "1", "customer": "UxU", "restaurant": "Klang Bak Kut Teh", "cuisine": "chinese", "menu": "Chinese Tea" , "time": "13:30:00"}
-{% endhighlight %}
+```
 ###pay
-{% highlight json %}
+```json
 { "command": "pay", "order": "1", "payment": "cash", "amount": "50"}
-{% endhighlight %}
-###display
-{% highlight json %}
+```
+```json
 ## to display restaurants
 { "command": "display", "thing": "restaurants"}
 ## to display orders
 { "command": "display", "thing": "orders"}
-{% endhighlight %}
+```
 
 ##IF YOU CTRL + A AND CTRL + C IN SAMPLE_INPUT.JSON THIS IS THE OUTPUT YOU WILL GET
 ###Dont mind the padding/ spacing 
-{% highlight json %}
+```json
 {
  "SYSTEM_USER": "customer UxU added",
  "status": "Success"
@@ -99,4 +98,4 @@ Used strategy pattern
  "SYSTEM_LOGOUT": "UxU logging out",
  "status": "Success"
 }
-{% endhighlight %}
+```
