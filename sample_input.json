@@ -1,0 +1,21 @@
+{ "command": "customer", "name": "UxU", "password": "12345" }
+
+{ "command": "login", "name": "UxU", "password": "12345" }
+
+{ "command": "restaurant", "name": "Klang Bak Kut Teh", "cuisine": "chinese", "opening": "06:00:00", "closing": "14:00:00", "menu": "Bak Kut Teh", "price": "10.80"}
+{ "command": "restaurant", "name": "Klang Bak Kut Teh", "cuisine": "chinese", "opening": "06:00:00", "closing": "14:00:00", "menu": "Chinese Tea", "price": "1.80"}
+
+{ "command": "order", "order": "1", "customer": "UxU", "restaurant": "Klang Bak Kut Teh", "cuisine": "chinese", "menu": "Bak Kut Teh", "time": "13:00:00"}
+
+{ "command": "cancel", "order": "2"}
+
+{ "command": "change", "order": "1", "customer": "UxU", "restaurant": "Klang Bak Kut Teh", "cuisine": "chinese", "menu": "Chinese Tea" , "time": "13:30:00"}
+
+{ "command": "deliver", "order": "1"}
+
+{ "command": "pay", "order": "1", "payment": "cash", "amount": "50"}
+
+{ "command": "display", "thing": "restaurants"}
+{ "command": "display", "thing": "orders"}
+
+{ "command": "logout", "name": "UxU"}

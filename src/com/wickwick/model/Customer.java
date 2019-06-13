@@ -1,18 +1,21 @@
 package com.wickwick.model;
 
-import java.security.Key;
+import java.util.ArrayList;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
+import com.wickwick.utils.Encryption;
 
-public class Customer {
+public class Customer implements Encryption{
 	private String name;
 	private String password;
+	private boolean loggedIn;
+	private ArrayList<Order> orderList;
 	
 	public Customer(String name, String password) {
 		setName(name);
-		if(encyprtPassword(name, password) != null) setPassword(encyprtPassword(name, password));
-		else System.out.println("Encryption failed");
+		if(encyprtPassword(password) != null) setPassword(encyprtPassword(password));
+		else System.out.println("Encryption failed"); // not a good way to debug
+		setLoggedIn(false);
+		orderList = new ArrayList<Order>();
 	}
 	/**
 	 * @return the name
@@ -20,40 +23,59 @@ public class Customer {
 	public String getName() {
 		return name;
 	}
-
 	/**
 	 * @param name the name to set
 	 */
 	private void setName(String name) {
 		this.name = name;
 	}
-
 	/**
 	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * @param password the password to set
 	 */
 	private void setPassword(String password) {
 		this.password = password;
 	}
-	
-	private String encyprtPassword(String name, String password) {
-		Key aesKey = new SecretKeySpec(password.getBytes(), "AES");
-		String encrypted = null;
-		try {
-			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-			byte[] encryption = cipher.doFinal(name.getBytes());
-			encrypted = new String(encryption);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return encrypted; 
+	/**
+	 * @return the status
+	 */
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+	/**
+	 * @return the orderList
+	 */
+	public ArrayList<Order> getOrderList() {
+		return orderList;
+	}
+	/**
+	 * @param order, orderList to add
+	 */
+	public void setOrderList(Order order) {
+		this.orderList.add(order);
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// DONE Auto-generated method stub
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (this.getClass() != obj.getClass()) return false;
+		Customer otherObj = (Customer) obj;
+		return this.name.equals(otherObj.name) 
+				&& this.password.equals(otherObj.password);
 	}
 }
