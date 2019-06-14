@@ -318,17 +318,17 @@ public class FoodOrderingSystem {
         		result.put("status", "Rejected");
             	result.put("ERROR_RESTAURANT", "restaurant is closed"); 
         	} else if (orderList.contains(order)) {
-        		if (restaurant.getMenuList().contains(menu) && !order.getMenuList().contains(menu)) {
+        		if (restaurant.getMenuList().contains(menu) && !order.isDeliver()) {
         			order.setMenuList(menu);
         			result.put("status", "Success");
                 	result.put("SYSTEM_UPDATE", menu.getName() + " added to order [" + order.getId() + "]");
-        		} else if (!restaurant.getMenuList().contains(menu)) {
+        		} else if (!restaurant.getMenuList().contains(menu) && !order.isDeliver()) {
         			result.put("status", "Rejected");
                 	result.put("ERROR_MENU", menu.getName() + " doesn't exist in " 
                 			+ restaurant.getName() + " (" + restaurant.getCuisine() + ")");
         		} else {
         			result.put("status", "Rejected");
-                	result.put("ERROR_ORDER", menu.getName() + " already in order [" + order.getId() + "]");
+                	result.put("ERROR_ORDER",  "order [" + order.getId() + "] already delivered");
         		}
             } else {
             	orderList.add(order);
