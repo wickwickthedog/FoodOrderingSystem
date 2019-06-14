@@ -147,15 +147,18 @@ public class FoodOrderingSystem {
 			
 			JSONObject deliverResult = new JSONObject();
 			Order toDeliver = getOrder(orderId3);
-			if (toDeliver != null) {
+			if (toDeliver.isDeliver()) {
+				deliverResult.put("status", "Rejected");
+				deliverResult.put("ERROR_DELIVERY", "order [" + toDeliver.getId() + "] delivered");
+			} else if (!toDeliver.isDeliver()) {
 				toDeliver.setDeliver(true);
 				deliverResult.put("status", "Success");
-				deliverResult.put("SYSTEM_DELIVERY", "order [" + toDeliver.getId() + "] is delivering or delivered");
-				
+				deliverResult.put("SYSTEM_DELIVERY", "order [" + toDeliver.getId() + "] is delivering or delivered");	
 			} else {
 				deliverResult.put("status", "Rejected");
-				deliverResult.put("ERROR_DELIVERY", "invalid order");
+				deliverResult.put("ERROR_404", "invalid order");
 			}
+
 			System.out.println(deliverResult.toString(1));
 			break;
 		
@@ -164,21 +167,31 @@ public class FoodOrderingSystem {
 			String paymentMethod = json.getString("payment");
 			double amount = Double.parseDouble(json.getString("amount"));
 			
+			
 			Order toPay = getOrder(orderId4);
-			PaymentMethod pay = getPaymentMethod(paymentMethod);
 			JSONObject paymentResult = new JSONObject();
-			if(amount < pay.getTotalCharge(toPay.getMenuList())) {
+			if (toPay.isPay()) {
 				paymentResult.put("status", "Rejected");
-				paymentResult.put("ERROR_$$", "insufficient amount");
-			} else if (amount == pay.getTotalCharge(toPay.getMenuList())){
-				toPay.setPay(true);
-				paymentResult.put("status", "Success");
-				paymentResult.put("SYSTEM_PAYMENT", "paid $" + pay.getTotalCharge(toPay.getMenuList()));
+				paymentResult.put("ERROR_PAID", "order [" + toPay.getId() + "] paid");
+			} else if (!toPay.isPay()){
+				PaymentMethod pay = getPaymentMethod(paymentMethod);
+				
+				if(amount < pay.getTotalCharge(toPay.getMenuList())) {
+					paymentResult.put("status", "Rejected");
+					paymentResult.put("ERROR_$$", "insufficient amount");
+				} else if (amount == pay.getTotalCharge(toPay.getMenuList())){
+					toPay.setPay(true);
+					paymentResult.put("status", "Success");
+					paymentResult.put("SYSTEM_PAYMENT", "paid $" + pay.getTotalCharge(toPay.getMenuList()));
+				} else {
+					toPay.setPay(true);
+					paymentResult.put("status", "Success");
+					paymentResult.put("SYSTEM_PAYMENT", "paid $" + pay.getTotalCharge(toPay.getMenuList()));
+					paymentResult.put("SYSTEM_PAYMENT", "balance $" + (amount - pay.getTotalCharge(toPay.getMenuList())));
+				}
 			} else {
-				toPay.setPay(true);
-				paymentResult.put("status", "Success");
-				paymentResult.put("SYSTEM_PAYMENT", "paid $" + pay.getTotalCharge(toPay.getMenuList()));
-				paymentResult.put("SYSTEM_PAYMENT", "balance $" + (amount - pay.getTotalCharge(toPay.getMenuList())));
+				paymentResult.put("status", "Rejected");
+				paymentResult.put("ERROR_404", "invalid order");
 			}
 			System.out.println(paymentResult.toString(1));
 			break;

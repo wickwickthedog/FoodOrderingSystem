@@ -38,9 +38,13 @@ Used strategy pattern
 ```json
 { "command": "change", "order": "1", "customer": "UxU", "restaurant": "Klang Bak Kut Teh", "cuisine": "chinese", "menu": "Chinese Tea" , "time": "13:30:00"}
 ```
-###pay
+###pay (by bank , cash , card)
 ```json
+{ "command": "pay", "order": "1", "payment": "bank", "amount": "50"}
+
 { "command": "pay", "order": "1", "payment": "cash", "amount": "50"}
+
+{ "command": "pay", "order": "1", "payment": "card", "amount": "50"}
 ```
 ```json
 ## to display restaurants
