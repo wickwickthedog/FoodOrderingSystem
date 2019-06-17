@@ -74,7 +74,7 @@ public class Restaurant {
 	/**
 	 * @param menu, menuList to add
 	 */
-	public void setMenuList(Menu menu) {
+	public void addMenu(Menu menu) {
 		this.menuList.add(menu);
 	}
 	/* (non-Javadoc)

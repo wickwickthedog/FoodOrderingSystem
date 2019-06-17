@@ -62,7 +62,7 @@ public class Customer implements Encryption{
 	/**
 	 * @param order, orderList to add
 	 */
-	public void setOrderList(Order order) {
+	public void addOrder(Order order) {
 		this.orderList.add(order);
 	}
 	/* (non-Javadoc)

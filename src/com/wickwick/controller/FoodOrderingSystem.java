@@ -240,7 +240,7 @@ public class FoodOrderingSystem {
             	result.put("ERROR_MENU", menu.getName() + " exist in " 
             			+ restaurant.getName() + " (" + restaurant.getCuisine() + ")");
         	} else if (!restaurant.getMenuList().contains(menu)) {
-        		restaurant.setMenuList(menu);
+        		restaurant.addMenu(menu);
     			result.put("status", "Success");
             	result.put("SYSTEM_MENU", "menu " + menu.getName() + " " + menu.getPrice() + " added to " 
             			+ restaurant.getName() + " (" + restaurant.getCuisine() + ")");
@@ -251,7 +251,7 @@ public class FoodOrderingSystem {
         	}
         } else {
         	restaurantList.add(restaurant);
-        	restaurant.setMenuList(menu);
+        	restaurant.addMenu(menu);
         	result.put("status", "Success");
         	result.put("SYSTEM_RESTAURANT", restaurant.getName() + " (" + restaurant.getCuisine() + ") added");
         }
